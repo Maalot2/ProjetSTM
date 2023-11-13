@@ -74,3 +74,5 @@ indices_to_display = (frequencies >= lower_freq_limit) & (frequencies <= upper_f
 % Tracez le module de la moyenne de la DFT en limitant les fréquences
 plot(frequencies(indices_to_display), average_magnitude(indices_to_display),'r');
 xlim([lower_freq_limit, upper_freq_limit]); % Limitez l'axe x
+
+
