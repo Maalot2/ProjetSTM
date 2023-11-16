@@ -8,11 +8,11 @@ window = triang(segment_length);
 % Calcule le nombre total de segments
 num_segments = floor((length(y) - overlap) / (segment_length - overlap));
 
-% Initialisez les tableaux pour stocker les résultats
+% Initialisation des tableaux pour stocker les résultats
 average_magnitude = zeros(1, segment_length);
 average_phase = zeros(1, segment_length);
 
-% Divisez le signal en segments, appliquez la fenêtre et calculez la FFT
+% Diviser le signal en segments, appliquer la fenêtre et calculer la FFT
 for i = 1:num_segments
     start_index = (i - 1) * (segment_length - overlap) + 1;
     end_index = start_index + segment_length - 1;
@@ -22,17 +22,17 @@ for i = 1:num_segments
     average_magnitude = average_magnitude + abs(segment_fft);
     average_phase = average_phase + angle(segment_fft);
 end
-% Moyennez les FFT
+% Moyenner les FFT
 average_magnitude = average_magnitude / num_segments;
 average_phase = average_phase / num_segments;
-% Calculez les fréquences correspondantes à la DFT
+% Calculer les fréquences correspondantes à la DFT
 frequencies = (0:segment_length - 1) * (Fe / segment_length);
-% Définissez les limites pour les fréquences que vous souhaitez afficher
+% Définisser les limites pour les fréquences que vous souhaitez afficher
 lower_freq_limit = 1; % Hz
 upper_freq_limit = 1000; % Hz
-% Identifiez les indices des fréquences à afficher
+% Identifier les indices des fréquences à afficher
 indices_to_display = (frequencies >= lower_freq_limit) & (frequencies <= upper_freq_limit);
-% Tracez le module de la moyenne de la DFT en limitant les fréquences
+% Tracer le module de la moyenne de la DFT en limitant les fréquences
 figure;
 plot(frequencies(indices_to_display), average_magnitude(indices_to_display),'b');
 xlabel('Fréquence (Hz)');
@@ -40,7 +40,7 @@ ylabel('Module de la DFT');
 title('Moyenne de la Transformée de Fourier Discrète (DFT)');
 xlim([lower_freq_limit, upper_freq_limit]); % Limitez l'axe x
 
-% Tracez la phase de la moyenne de la DFT en limitant les fréquences
+% Tracer la phase de la moyenne de la DFT en limitant les fréquences
 % figure;
 % plot(frequencies(indices_to_display), average_phase(indices_to_display));
 % xlabel('Fréquence (Hz)');
@@ -51,7 +51,7 @@ xlim([lower_freq_limit, upper_freq_limit]); % Limitez l'axe x
 hold on;
 
 %fenêtre décalé de 2000 echantillons
-% Divisez le signal en segments, appliquez la fenêtre et calculez la FFT
+% Diviser le signal en segments, appliquer la fenêtre et calculer la FFT
 for i = 1:num_segments
     start_index = (i - 1) * (segment_length - overlap) + 2001;
     end_index = start_index + segment_length - 1;
@@ -61,18 +61,42 @@ for i = 1:num_segments
     average_magnitude = average_magnitude + abs(segment_fft);
     average_phase = average_phase + angle(segment_fft);
 end
-% Moyennez les FFT
+% Moyenner les FFT
 average_magnitude = average_magnitude / num_segments;
 average_phase = average_phase / num_segments;
-% Calculez les fréquences correspondantes à la DFT
+% Calculer les fréquences correspondantes à la DFT
 frequencies = (0:segment_length - 1) * (Fe / segment_length);
-% Définissez les limites pour les fréquences que vous souhaitez afficher
+% Limites pour les fréquences que nous souhaitons afficher
 lower_freq_limit = 1; % Hz
 upper_freq_limit = 1000; % Hz
-% Identifiez les indices des fréquences à afficher
+% Identifier les indices des fréquences à afficher
 indices_to_display = (frequencies >= lower_freq_limit) & (frequencies <= upper_freq_limit);
-% Tracez le module de la moyenne de la DFT en limitant les fréquences
+% Tracer le module de la moyenne de la DFT en limitant les fréquences
 plot(frequencies(indices_to_display), average_magnitude(indices_to_display),'r');
 xlim([lower_freq_limit, upper_freq_limit]); % Limitez l'axe x
+
+
+
+
+
+% Utiliser la fonction findpeaks pour détecter les pics basés sur la hauteur
+[peaks, peak_indices] = findpeaks(average_magnitude(indices_to_display), 'MinPeakProminence', seuil_pic_initial);
+
+% Sélectionner les pics dont la fréquence est supérieure à 200 Hz
+selected_peaks = peaks(frequencies(peak_indices+1) > 200);
+selected_peak_indices = peak_indices(frequencies(peak_indices+1) > 200);
+
+% Afficher les résultats finaux
+disp('Fréquences des pics :');
+disp(frequencies(selected_peak_indices+1));
+disp('Amplitudes des pics :');
+disp(selected_peaks);
+
+% Tracer les pics détectés
+hold on;
+scatter(frequencies(selected_peak_indices+1), selected_peaks, 'r', 'filled');
+xlabel('Fréquence (Hz)');
+ylabel('Module de la DFT');
+title('Spectre avec détection automatique des pics');
 
 
