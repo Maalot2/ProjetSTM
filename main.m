@@ -77,10 +77,12 @@ xlim([lower_freq_limit, upper_freq_limit]); % Limitez l'axe x
 
 
 
-
+% Récupération amplitude max
+magnitude_max = max(average_magnitude(:));
+seuil = 0.05;
 
 % Utiliser la fonction findpeaks pour détecter les pics basés sur la hauteur
-[peaks, peak_indices] = findpeaks(average_magnitude(indices_to_display), 'MinPeakProminence', seuil_pic_initial);
+[peaks, peak_indices] = findpeaks(average_magnitude(indices_to_display), 'MinPeakProminence', seuil * magnitude_max);
 
 % Sélectionner les pics dont la fréquence est supérieure à 200 Hz
 selected_peaks = peaks(frequencies(peak_indices+1) > 200);
