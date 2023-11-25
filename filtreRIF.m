@@ -36,7 +36,7 @@ Retard=DP/Df/(-2*pi)
 %%axis([0 N+1 min(h)-0.1 max(h)+0.1])
 %---------------------- Synthèse du signal test ------------------------
 %%figure
-[x, F1] = audioread('frelon_court.wav');
+[x, F1] = audioread('abeille5.wav');
 t= 0:Te:(length(x)-1)*Te ; % définition de la variable temps : période
 % d'échantillonnage Te
 %F1=10 ; % Fréquence F1

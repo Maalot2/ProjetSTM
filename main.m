@@ -53,7 +53,7 @@ hold on;
 %fenêtre décalé de 2000 echantillons
 % Diviser le signal en segments, appliquer la fenêtre et calculer la FFT
 for i = 1:num_segments
-    start_index = (i - 1) * (segment_length - overlap) + 2001;
+    start_index = (i - 1) * (segment_length - overlap) + 1;
     end_index = start_index + segment_length - 1;
     segment = y(start_index:end_index);
     windowed_segment = segment .* window;
