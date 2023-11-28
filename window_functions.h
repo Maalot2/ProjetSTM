@@ -1,0 +1,8 @@
+/*
+// Created by jackb on 28/11/2023.
+*/
+
+#ifndef PROJETSTM_WINDOW_FUNCTIONS_H
+#define PROJETSTM_WINDOW_FUNCTIONS_H
+
+#endif //PROJETSTM_WINDOW_FUNCTIONS_H*/
