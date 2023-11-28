@@ -35,11 +35,13 @@ void cosine_window(double * w, unsigned n, const double * coeff, unsigned ncoeff
     }
 }
 /*!
- * Defining cosinus window function useful for many other windows.
+ * Defining triangular window function.
  * \param[in] w  This is a pointer to a double array where the calculated triangular window will be stored
  * \param[in] n the length of the triangular window
+ *
  * \return nothing
  */
+
 void triangular (double *w, unsigned n){
     const unsigned denominator =  (n % 2 != 0) ? (n + 1) : n;// The n parameter is used to calculate the denominator based on whether n is odd or even.
     for (unsigned i = 0; i < n; ++i)
