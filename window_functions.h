@@ -15,8 +15,9 @@ extern "C" {
 
 #include <stdbool.h>
 
-void cosine_window(double * w, unsigned n, const double * coeff, unsigned ncoeff, bool sflag);
-void triangular (double *w, unsigned n);
+void cosine_window(double * w, unsigned int n, const double * coeff, unsigned int ncoeff, bool sflag);
+void triangular (double *w, unsigned int n);
+void triangular_applyWindow(double *input);
 }
 
 #endif //PROJETSTM_WINDOW_FUNCTIONS_H*/
