@@ -25,25 +25,20 @@
 #include "arm_math.h"
 #include "audio_application.h"
 /* Private typedef -----------------------------------------------------------*/
+
 /* Private define ------------------------------------------------------------*/
 #define FFT_BUFFER_SIZE 2048
 
-arm_rfft_fast_instance_f32 fftHandler;
-
-float fftBufIn[FFT_BUFFER_SIZE];
-
-float fftBufOut[FFT_BUFFER_SIZE];
-
-uint8_t fftFlag =0;
-
-int new_Audio=1;
-
-float fft_freq[FFT_BUFFER_SIZE/2+1];
-
-float sampling_rate = 8000.0f; //fréquence d'echantillonage à 8kHz
-
 /* Private macro -------------------------------------------------------------*/
+
 /* Private variables ---------------------------------------------------------*/
+arm_rfft_fast_instance_f32 fftHandler;
+float fftBufIn[FFT_BUFFER_SIZE];
+float fftBufOut[FFT_BUFFER_SIZE];
+uint8_t fftFlag =0;
+int new_Audio=1;
+float fft_freq[FFT_BUFFER_SIZE/2+1];
+float sampling_rate = 8000.0f; //fréquence d'echantillonage à 8kHz
 
 
 /** @addtogroup X_CUBE_MEMSMIC1_Applications
