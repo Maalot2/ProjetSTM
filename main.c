@@ -24,7 +24,6 @@
 #include "cube_hal.h"
 #include "arm_math.h"
 #include "audio_application.h"
-#include <stdlib.h>
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 #define FFT_BUFFER_SIZE 2048
