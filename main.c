@@ -31,9 +31,10 @@
 
 /* Private macro -------------------------------------------------------------*/
 
+
 /* Private variables ---------------------------------------------------------*/
+extern float PCM_Buffer[FFT_BUFFER_SIZE];
 arm_rfft_fast_instance_f32 fftHandler;
-float fftBufIn[FFT_BUFFER_SIZE];
 float fftBufOut[FFT_BUFFER_SIZE];
 uint8_t fftFlag =0;
 int new_Audio=1;
@@ -110,7 +111,7 @@ int main(void)
     while (1)
     {
         if(new_Audio){
-            arm_rfft_fast_f32(&fftHandler,fftBufIn,fftBufOut,fftFlag);
+            arm_rfft_fast_f32(&fftHandler,PCM_Buffer,fftBufOut,fftFlag);
 
             for(int k;k<=FFT_BUFFER_SIZE/2;++k){
                 fft_freq[k]= (float)k*sampling_rate/FFT_BUFFER_SIZE;
