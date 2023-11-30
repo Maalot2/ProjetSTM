@@ -17,7 +17,7 @@
  *
  * \return nothing
  */
-void cosine_window(double * w, unsigned int n, const double * coeff, unsigned int ncoeff, bool sflag){
+void cosine_window(float * w, unsigned int n, const float * coeff, unsigned int ncoeff, bool sflag){
     if (n == 1){
         // Special case for n == 1.
         w[0] = 1.0;
@@ -42,7 +42,7 @@ void cosine_window(double * w, unsigned int n, const double * coeff, unsigned in
  * \return nothing
  */
 
-void triangular (double *w, unsigned int n){
+void triangular (float *w, unsigned int n){
     const unsigned denominator =  (n % 2 != 0) ? (n + 1) : n;// The n parameter is used to calculate the denominator based on whether n is odd or even.
     for (unsigned i = 0; i < n; ++i)
     {
