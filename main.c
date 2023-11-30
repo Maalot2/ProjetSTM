@@ -37,7 +37,7 @@ extern float PCM_Buffer[FFT_BUFFER_SIZE];
 arm_rfft_fast_instance_f32 fftHandler;
 float fftBufOut[FFT_BUFFER_SIZE];
 uint8_t fftFlag =0;
-int new_Audio=1;
+int new_Audio=1; // variable to start the fft
 float fft_freq[FFT_BUFFER_SIZE/2+1];
 float sampling_rate = 8000.0f; //fréquence d'echantillonage à 8kHz
 
