@@ -1,7 +1,7 @@
 %  'y' est le signal discret filtré.
 y = filtreRIF(80);
 Fe = 44100; % Fréquence d'échantillonnage
-segment_length = 8192;
+segment_length = 2048;
 overlap = segment_length / 2;
 window = triang(segment_length);
 
