@@ -28,7 +28,7 @@
 
 /* Private define ------------------------------------------------------------*/
 #define FFT_BUFFER_SIZE 4800
-
+#define ARM_MATH_CM4
 /* Private macro -------------------------------------------------------------*/
 
 
@@ -37,7 +37,6 @@ extern float PCM_Buffer[FFT_BUFFER_SIZE];
 arm_rfft_fast_instance_f32 fftHandler;
 float fftBufOut[FFT_BUFFER_SIZE];
 uint8_t fftFlag =0;
-int new_Audio=1; // variable to start the fft
 float fft_freq[FFT_BUFFER_SIZE/2+1];
 float sampling_rate = 8000.0f; //fréquence d'echantillonage à 8kHz
 
@@ -110,20 +109,24 @@ int main(void)
 
     while (1)
     {
-        if(new_Audio){
-            arm_rfft_fast_f32(&fftHandler,PCM_Buffer,fftBufOut,fftFlag);
 
-            for(int k;k<=FFT_BUFFER_SIZE/2;++k){
-                fft_freq[k]= (float)k*sampling_rate/FFT_BUFFER_SIZE;
-            }
-
-            fftFlag =1;
-        }
     }
 }
 
 /* Private functions ---------------------------------------------------------*/
+void FFT(){
+    arm_rfft_fast_f32(&fftHandler,PCM_Buffer,fftBufOut,fftFlag);
+    int freqs[1024];
+    int freqpoint = 0;
+    int offset = 150; //variable noisefloor offset
+    //calculate abs values and linear-to-dB
+    for (int i=0; i<2048; i=i+2) {
+        freqs[freqpoint] = (int)(20*log10f(complexABS(fft_out_buf[i], fft_out_buf[i+1])))-offset;
+        if (freqs[freqpoint]<0) freqs[freqpoint]=0;
+        freqpoint++;
+    }
 
+}
 
 #ifdef  USE_FULL_ASSERT
 
