@@ -114,6 +114,12 @@ int main(void)
 }
 
 /* Private functions ---------------------------------------------------------*/
+
+float complexABS(float real, float compl) {
+    return sqrtf(real*real+compl*compl);
+}
+
+
 void FFT(){
     arm_rfft_fast_f32(&fftHandler,PCM_Buffer,fftBufOut,fftFlag);
     int freqs[1024];
