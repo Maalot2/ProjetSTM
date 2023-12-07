@@ -13,7 +13,9 @@ float calculateInitialThreshold(float *Yin)
     // Vous pouvez choisir d'utiliser la moyenne ou la médiane ici
     // Exemple avec la moyenne :
     float sum = 0.0;
-    for (int i = 0; i < LENGTHYIN; i++)
+    int i;
+
+    for (i = 0; i < LENGTHYIN; i++)
     {
         sum += Yin[i];
     }
@@ -26,8 +28,9 @@ float calculateInitialThreshold(float *Yin)
  * @brief Met à jour le seuil dynamique en fonction de la moyenne mobile des amplitudes des pics.
  *
  * @param recentAmplitude Amplitude du pic le plus récent.
+ * @param dynamicThreshold ancien threshold.
+ * return la moyenne mobile
  */
-
 float updateExpMovingAverage(float recentAmplitude, float dynamicThreshold)
 {
     // Mettre à jour le seuil dynamique avec la moyenne mobile
@@ -42,16 +45,15 @@ float updateExpMovingAverage(float recentAmplitude, float dynamicThreshold)
  *
  * @param Yin Tableau d'entrée représentant le signal.
  * @param Ypk Tableau de sortie pour stocker les amplitudes des pics.
- * @param numPeaks Pointeur vers la variable pour stocker le nombre de pics trouvés.
  */
 void findpeaks(float *Yin, int *iPk)
 {
     // Paramètres
     float MinPeakHeight = 1.0;
-    int i, j;
+    int i;
 
     // On rempli iPk de -1 car -1 correspond au valeurs d'erreur (pas de pic)
-    for (int i = 0; i < LENGTHYIN; i++)
+    for (i = 0; i < LENGTHYIN; i++)
     {
         iPk[i] = -1;
     }
@@ -73,7 +75,6 @@ void findpeaks(float *Yin, int *iPk)
  *
  * @param Yin Tableau d'entrée représentant le signal.
  * @param iPk Tableau de sortie pour stocker les indices des pics.
- * @param iInflect Tableau de sortie pour stocker les indices des points d'inflexion.
  */
 void getAllPeaks(float *Yin, int *iPk)
 {
@@ -114,7 +115,6 @@ void removePeaksBelowMinPeakHeight(float *Yin, int *iPk, float MinPeakHeight)
  *
  * @param Yin Tableau d'entrée représentant le signal.
  * @param iPk Tableau des indices des pics à modifier.
- * @param Threshold Seuil en dessous duquel un pic est supprimé.
  */
 void removePeaksBelowThreshold(float *Yin, int *iPk)
 {
@@ -185,7 +185,7 @@ void findLocalMaxima(float *Yin, int *iPk)
 
 
 /* EXEMPLE TEST */
-
+/*
 int main()
 {
     int iPk[LENGTHYIN];
@@ -209,3 +209,4 @@ int main()
 
     return 0;
 }
+*/
