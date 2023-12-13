@@ -1,9 +1,9 @@
 %  'y' est le signal discret filtré.
 %y = filtreRIF(80);
-[x, F1] = audioread('attaque_fre.WAV');
+[x, F1] = audioread('frelon3.WAV');
 Fe = 8192; % Fréquence d'échantillonnage
 x_resampled = resample(x, Fe, F1);  % conversion en 8kHz
-segment_length = 1024;
+segment_length = 2048;
 y=x_resampled(:, 1);    % on garde que 1 canal
 overlap = segment_length / 2;
 window = triang(segment_length);
