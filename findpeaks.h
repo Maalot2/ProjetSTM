@@ -4,7 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define LENGTHYIN 1024
+#define AUDIO_SIZE 2048
+#define LENGTHYIN AUDIO_SIZE/2
 #define ALPHA 0.0001  // Constante d'ajustement pour la moyenne mobile exponentielle
 
 void findpeaks(float *Yin, int *iPk);
