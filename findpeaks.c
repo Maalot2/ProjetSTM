@@ -55,6 +55,8 @@ int findpeaks(float *Yin, int **iPk)
     int nbPeaks;
     int i,j = 0;
 
+    *iPk = NULL; // Par prévention
+
     // Allouer dynamiquement de la mémoire pour un tableau temporaire
     if((tempArray = (int *)malloc(LENGTHYIN * sizeof(int))) == NULL)
     {
@@ -68,13 +70,22 @@ int findpeaks(float *Yin, int **iPk)
     }
 
     // Trouver les pics
-    getAllPeaks(Yin, tempArray);
+    if(getAllPeaks(Yin, tempArray) <= 0)
+    {
+        return 0; // on n'a trouvé aucun pic
+    }
 
     // Supprimer les pics en dessous de MinPeakHeight
-    removePeaksBelowMinPeakHeight(Yin, tempArray, MinPeakHeight);
+    if(removePeaksBelowMinPeakHeight(Yin, tempArray, MinPeakHeight) <= 0)
+    {
+        return 0; // on n'a trouvé aucun pic
+    }
 
     // Supprimer les pics en dessus du threshold dynamic
-    nbPeaks = removePeaksBelowThreshold(Yin, tempArray);
+    if((nbPeaks = removePeaksBelowThreshold(Yin, tempArray)) <= 0)
+    {
+        return 0; // on n'a trouvé aucun pic
+    }
 
     // Allouer dynamiquement de la mémoire pour notre tableau final
     if((*iPk = (int *)malloc(nbPeaks * sizeof(int))) == NULL)
