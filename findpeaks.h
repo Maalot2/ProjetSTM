@@ -8,7 +8,7 @@
 #define LENGTHYIN AUDIO_SIZE/2
 #define ALPHA 0.0001  // Constante d'ajustement pour la moyenne mobile exponentielle
 
-int findpeaks(float *Yin, int **iPk);
+int findpeaks(float *Yin, int *iPk);
 int getAllPeaks(float *Yin, int *iPk);
 int removePeaksBelowMinPeakHeight(float *Yin, int *iPk, float MinPeakHeight);
 int removePeaksBelowThreshold(float *Yin, int *iPk);
