@@ -11,20 +11,15 @@
 * mouche -> f0 entre 190Hz et 210Hz -> SNR > 3
 * */
 //retour : 1 = frelon, 2 = abeille, 3 = mouche , -1 = Non trouvé
-int detection(int *IndicePic, float *freqAll, float *AmpALL){
+int detection(int nbpeak,int *IndicePic, float *freqAll, float *AmpALL){
     int i=0;
     float f0=0;
     float N0=0;
-    while(IndicePic[i+1]!=-1){
-        f0+=freqAll[IndicePic[i+1]]-freqAll[IndicePic[i]];
-        i++;
-    }
-    f0=f0/(float)i;
-    i=0;
-    while(IndicePic[i+1]!=-1){
+    for(i=0;i<nbpeak-1;i++) {
+        f0 += freqAll[IndicePic[i + 1]] - freqAll[IndicePic[i]];
         N0+=AmpALL[IndicePic[i+1]]-AmpALL[IndicePic[i]];
-        i++;
     }
+    f0/=(float)i;
     N0/=(float)i;
 
 //ENTRE 1000 ET 2000HZ

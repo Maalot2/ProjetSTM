@@ -6,6 +6,6 @@
 #define PROJ_DETECTION_H
 
 
-int detection(int *IndicePic,float *freqAll, float *AmpALL);
+int detection(int nbpeak,int *IndicePic,float *freqAll, float *AmpALL);
 
 #endif //PROJ_DETECTION_H
