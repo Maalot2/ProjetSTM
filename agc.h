@@ -2,6 +2,9 @@
 #define AGC_H
 
 #include <stdio.h>
+
+#define TARGET 10000
+
 // Structure pour stocker les paramètres de l'AGC
 typedef struct {
     float gain;  // Gain actuel
@@ -14,6 +17,6 @@ void initAGC(AGC_s *agc, float target, float alpha);
 void updateAGC(AGC_s *agc, float input);
 // Appliquer le gain à un signal
 float applyGain(AGC_s *agc, float input);
-void AGC(float *x, float *y, float target, int size);
+void AGC(AGC_s *agc, float *x, float *y, float target, int size);
 
 #endif // AGC_H
