@@ -28,7 +28,9 @@ float applyGain(AGC_s *agc, float input) {
     return agc->gain * input;
 }
 
-void AGC(AGC_s *agc, float *x, float *y, float target, int size)
+
+void AGC(float *x, float *y, int size)
+
 {
     int i=0;
 
