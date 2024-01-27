@@ -1,6 +1,6 @@
 %  'y' est le signal discret filtré.
 %y = filtreRIF(80);
-[x, F1] = audioread('frelon_nid2.WAV');
+[x, F1] = audioread('tone_test.WAV');
 Fe = 8192; % Fréquence d'échantillonnage
 x_resampled = resample(x, Fe, F1);  % conversion en 8kHz
 segment_length = 2048;
